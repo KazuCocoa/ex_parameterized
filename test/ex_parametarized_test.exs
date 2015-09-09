@@ -9,7 +9,7 @@ defmodule ExParametarizedTest do
       [
         {1, 2, 3}
       ]
-    end
+  end
 
   test_with_params "description",
     fn (a, b, expected) ->
@@ -19,5 +19,5 @@ defmodule ExParametarizedTest do
         {"dog", "cats", "dog and cats"},
         {"hello", "world", "hello and world"}
       ]
-    end
+  end
 end

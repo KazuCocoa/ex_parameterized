@@ -19,7 +19,7 @@ defmodule ExUnit.Parametarized do
           [
             {1, 2, 3}
           ]
-        end
+      end
 
       test_with_params "describe description",
         fn (a, b, expected) ->
@@ -29,7 +29,7 @@ defmodule ExUnit.Parametarized do
             {"dog",   "cats",  "dog and cats"},
             {"hello", "world", "hello and world"}
           ]
-        end
+      end
     end
   """
 
