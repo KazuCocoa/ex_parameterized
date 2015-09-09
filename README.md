@@ -12,7 +12,7 @@ Please see `test/ex_parametarized_test.exs`.
 
 ## Usage
 
-Please see module docs.
+Please see module [docs](http://hexdocs.pm/ex_parametarized/overview.html).
 
 ## Install
 
