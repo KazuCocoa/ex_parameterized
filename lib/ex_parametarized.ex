@@ -12,7 +12,7 @@ defmodule ExUnit.Parametarized do
       use ExUnit.Case, async: true
       use ExUnit.Parametarized
 
-      test_with_params "describe description",
+      test_with_params "describe description1",
         fn (a, b, expected) ->
           assert a + b == expected
         end do
@@ -21,7 +21,7 @@ defmodule ExUnit.Parametarized do
           ]
       end
 
-      test_with_params "describe description",
+      test_with_params "describe description2",
         fn (a, b, expected) ->
           assert a <> " and " <> b == expected
         end do
