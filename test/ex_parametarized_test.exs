@@ -1,5 +1,5 @@
 defmodule ExParametarizedTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   use ExUnit.Parametarized
 
   test_with_params "description",
