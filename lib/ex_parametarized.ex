@@ -31,6 +31,35 @@ defmodule ExUnit.Parametarized do
           ]
       end
     end
+
+
+  Tun each test cases with line number suffix.
+  So, if you failed test, then you can see which parameter is failed.
+
+    defmodule MyExample.Test do
+      use ExUnit.Case, async: true
+      use ExUnit.Parametarized
+
+      test_with_params "describe description1",
+        fn (a, b, expected) ->
+          assert a + b == expected
+        end do
+          [
+            {1, 1, 3}
+          ]
+      end
+    end
+
+  The result is...
+
+    1) test add params_line10 (MyExample.Test)
+       test/my_example_test.exs:5
+       Assertion with == failed
+       code: a + b == expected
+       lhs:  2
+       rhs:  3
+       stacktrace:
+         test/ex_parametarized_test.exs:5
   """
 
   defmacro __using__(_) do
