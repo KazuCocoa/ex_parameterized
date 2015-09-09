@@ -1,0 +1,2 @@
+defmodule ExParametarized do
+end
