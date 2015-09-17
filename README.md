@@ -20,11 +20,34 @@ First, add Reporter to your mix.exs dependencies:
 
 ```
 def deps do
-  [{:ex_parametarized, "~> 0.1.0"}]
+  [{:ex_parametarized, "~> 0.2.0"}]
 end
 ```
 
 and run ``$ mix deps.get`.
+
+## QuickUse
+
+Should set `use ExUnit.Parametarized` in module.
+
+```elixir
+defmodule MyExampleTest do
+  use ExUnit.Case, async: true
+  use ExUnit.Parametarized        # Required
+
+  test_with_params "add params",  # description
+    fn (a, b, expected) ->        # test case
+      assert a + b == expected
+    end do
+      [
+        {1, 2, 3},                 # parameters
+        {1, 4, 5},                 # parameters
+      ]
+  end
+end
+```
+
+
 
 ## Licence
 
