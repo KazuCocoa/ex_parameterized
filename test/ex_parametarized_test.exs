@@ -42,4 +42,15 @@ defmodule ExParametarizedTest do
       ]
   end
 
+  test_with_params "mixed no desc and with desc for each params",
+    fn (a, b, expected) ->
+      str = a <> " and " <> b
+      assert str == expected
+    end do
+      [
+        {"dog", "cats", "dog and cats"}, # no description
+        "description for param2": {"hello", "world", "hello and world"} # with description
+      ]
+  end
+
 end

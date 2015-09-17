@@ -41,7 +41,7 @@ defmodule MyExampleTest do
     end do
       [
         {1, 2, 3},                 # parameters
-        {1, 4, 5},                 # parameters
+        "description": {1, 4, 5},  # parameters with description
       ]
   end
 end
