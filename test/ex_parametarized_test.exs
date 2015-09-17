@@ -13,7 +13,8 @@ defmodule ExParametarizedTest do
 
   test_with_params "create wordings",
     fn (a, b, expected) ->
-      assert a <> " and " <> b == expected
+      str = a <> " and " <> b
+      assert str == expected
     end do
       [
         {"dog", "cats", "dog and cats"},
@@ -27,6 +28,17 @@ defmodule ExParametarizedTest do
     end do
       [
         {1, 2, 2}
+      ]
+  end
+
+  test_with_params "add description for each params",
+    fn (a, b, expected) ->
+      str = a <> " and " <> b
+      assert str == expected
+    end do
+      [
+        "description for param1": {"dog", "cats", "dog and cats"},
+        "description for param2": {"hello", "world", "hello and world"}
       ]
   end
 

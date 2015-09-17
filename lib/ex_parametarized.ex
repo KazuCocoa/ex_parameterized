@@ -30,8 +30,18 @@ defmodule ExUnit.Parametarized do
             {"hello", "world", "hello and world"}
           ]
       end
-    end
 
+      test_with_params "add description for each params",
+        fn (a, b, expected) ->
+          str = a <> " and " <> b
+          assert str == expected
+        end do
+          [
+            "description for param1": {"dog", "cats", "dog and cats"},
+            "description for param2": {"hello", "world", "hello and world"}
+          ]
+      end
+    end
 
   Tun each test cases with line number suffix.
   So, if you failed test, then you can see which parameter is failed.
