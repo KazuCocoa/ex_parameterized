@@ -2,6 +2,16 @@ defmodule ExParametarizedTest do
   use ExUnit.Case, async: true
   use ExUnit.Parametarized
 
+  test_with_params "compare two values",
+    fn (a, expected) ->
+      assert a == expected
+    end do
+      [
+        {1, 1},
+        "two values": {"hello", "hello"}
+      ]
+  end
+
   test_with_params "add params",
     fn (a, b, expected) ->
       assert a + b == expected
