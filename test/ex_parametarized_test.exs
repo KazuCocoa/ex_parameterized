@@ -2,6 +2,36 @@ defmodule ExParametarizedTest do
   use ExUnit.Case, async: true
   use ExUnit.Parametarized
 
+  test "ast format when one param" do
+    import ExUnit.Parametarized.Params
+    assert (
+      quote do
+        test_with_params "ast test", fn (a) -> a == "test" end do
+          [{"test"}]
+        end
+      end
+      |> Macro.to_string) == String.strip ~S"""
+        test_with_params("ast test", fn a -> a == "test" end) do
+          [{"test"}]
+        end
+        """
+  end
+
+  test "ast format when two param" do
+    import ExUnit.Parametarized.Params
+    assert (
+      quote do
+        test_with_params "ast test", fn (a, b) -> assert a + b == 2 end do
+          [{1, 2}]
+        end
+      end
+      |> Macro.to_string) == String.strip ~S"""
+        test_with_params("ast test", fn a, b -> assert(a + b == 2) end) do
+          [{1, 2}]
+        end
+        """
+  end
+
   test_with_params "provide one param",
     fn (a) ->
       assert a == 1
