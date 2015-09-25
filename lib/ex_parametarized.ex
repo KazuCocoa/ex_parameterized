@@ -1,5 +1,4 @@
 defmodule ExUnit.Parametarized do
-
   @moduledoc """
   ExUnit.Parametarized support parametarized test with ExUnit.
   Macro of `test_with_params` run standard `test` macro in it.
