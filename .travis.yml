@@ -1,0 +1,17 @@
+language: elixir
+elixir:
+  - 1.0.4
+  - 1.0.5
+
+sudo: false
+
+before_script:
+  - mix local.hex --force
+  - mix do deps.get -- only test
+
+script:
+  - mix test
+
+notifications:
+  slack:
+    secure: LfXfHir6vRItd9BPGUG1mjvstyXkofkCnvbvERQRDEYtuai7sJCH5Rx/oGhXjEsiL6SdQE6MPUq2Aqm3xL6OxsPPgKzE4bkL8F4/GE5a3eFXSZluf6L9+5HgYPrwnxiUwrKhJRWWrq7lmyM1Rv3LudYPprN2rHXoq7G7NPDKM2u0KRO1LJa7b0V4B3dUA1KNTF0zqqb8rygA+axziWXMv1/KPJ+yIKgSjtzvVx8R1F/5EleRbtWdV/gsw4cWqul3Fo8ull7FgnLgKjE2C5qRwbjMoP/rek0U27p8JijwKbYpIA09uyIeFf1nBBgBskzpoRKdDDiZQSFB5h3SS9bJqLcEPRlWYl164HiRfMhNMh3kqUXr7CjM+2Fw3pneGbncvjQWg3oIqOVYNCzvuqUqm9T71wNx/Ipz/wjS5v+F0sEjtDX+rATV/0FtbtJCQCgv17gQF4Wok8WaTgmXsXr1E+Qh5WCBrQnB6dDTB6a6cExGndzhaw3Vu28n2kwYCMS0rEIr76n4Bq3lz37p6B3gcILSfottGU6Y+Ujc74DNzjqswlYOJbY/bbZxaNdQNozQ/T61uyRV/puQmBCgay1aCvZt5mBOwY0Ac4a1ngZOg+ryoBEBE+QM2pnnW92YKOsaDJjG9cEOsd7JAVwgkMACeFWv1+GtHtALwTiHxDFLSuQ=
