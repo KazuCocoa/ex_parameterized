@@ -32,6 +32,16 @@ defmodule ExParametarizedTest do
         """
   end
 
+  @tag skip: "If failed to skip, test will fail"
+  test_with_params "skipped test",
+    fn (a) ->
+      assert a == true
+    end do
+      [
+        {false},
+      ]
+  end
+
   test_with_params "provide one param",
     fn (a) ->
       assert a == 1
