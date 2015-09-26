@@ -7,57 +7,57 @@ defmodule ExUnit.Parametarized do
 
   You can run parametarized test with a `test_with_params` macro:
 
-    defmodule MyExample.Test do
-      use ExUnit.Case, async: true
-      use ExUnit.Parametarized
+      defmodule MyExample.Test do
+        use ExUnit.Case, async: true
+        use ExUnit.Parametarized
 
-      test_with_params "describe description1",
-        fn (a, b, expected) ->
-          assert a + b == expected
-        end do
-          [
-            {1, 2, 3}
-          ]
-      end
+        test_with_params "describe description1",
+          fn (a, b, expected) ->
+            assert a + b == expected
+          end do
+            [
+              {1, 2, 3}
+            ]
+        end
 
-      test_with_params "describe description2",
-        fn (a, b, expected) ->
-          assert a <> " and " <> b == expected
-        end do
-          [
-            {"dog",   "cats",  "dog and cats"},
-            {"hello", "world", "hello and world"}
-          ]
-      end
+        test_with_params "describe description2",
+          fn (a, b, expected) ->
+            assert a <> " and " <> b == expected
+          end do
+            [
+              {"dog",   "cats",  "dog and cats"},
+              {"hello", "world", "hello and world"}
+            ]
+        end
 
-      test_with_params "add description for each params",
-        fn (a, b, expected) ->
-          str = a <> " and " <> b
-          assert str == expected
-        end do
-          [
-            "description for param1": {"dog", "cats", "dog and cats"},
-            "description for param2": {"hello", "world", "hello and world"}
-          ]
+        test_with_params "add description for each params",
+          fn (a, b, expected) ->
+            str = a <> " and " <> b
+            assert str == expected
+          end do
+            [
+              "description for param1": {"dog", "cats", "dog and cats"},
+              "description for param2": {"hello", "world", "hello and world"}
+            ]
+        end
       end
-    end
 
   Each test cases have number suffix when run them.
   So, if you failed test, then you can see which parameter is failed.
 
-    defmodule MyExample.Test do
-      use ExUnit.Case, async: true
-      use ExUnit.Parametarized
+      defmodule MyExample.Test do
+        use ExUnit.Case, async: true
+        use ExUnit.Parametarized
 
-      test_with_params "describe description1",
-        fn (a, b, expected) ->
-          assert a + b == expected
-        end do
-          [
-            {1, 1, 3}
-          ]
+        test_with_params "describe description1",
+          fn (a, b, expected) ->
+            assert a + b == expected
+          end do
+            [
+              {1, 1, 3}
+            ]
+        end
       end
-    end
 
   The result is...
 
@@ -74,20 +74,20 @@ defmodule ExUnit.Parametarized do
   You can skip test with `@tag :skip` or `@tag skip: "If failed to skip, fail test"`.
   (Require Elixir 1.1.0)
 
-    defmodule MyExample.Test do
-      use ExUnit.Case, async: true
-      use ExUnit.Parametarized
+      defmodule MyExample.Test do
+        use ExUnit.Case, async: true
+        use ExUnit.Parametarized
 
-      @tag skip: "If failed to skip, fail test"
-      test_with_params "skipped test",
-        fn (a) ->
-          assert a == true
-        end do
-          [
-            {false},
-          ]
+        @tag skip: "If failed to skip, fail test"
+        test_with_params "skipped test",
+          fn (a) ->
+            assert a == true
+          end do
+            [
+              {false},
+            ]
+        end
       end
-    end
   """
 
   defmacro __using__(_) do
