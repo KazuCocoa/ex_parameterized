@@ -12,7 +12,7 @@ Please see `test/ex_parametarized_test.exs`.
 
 ## Usage
 
-Please see module [docs](http://hexdocs.pm/ex_parametarized/overview.html).
+Please see module [docs](http://hexdocs.pm/ex_parametarized/extra-api-reference.html).
 
 ## Install
 
@@ -21,7 +21,7 @@ First, add Reporter to your mix.exs dependencies:
 ```
 def deps do
   [
-    {:ex_parametarized, "~> 0.3.0"}
+    {:ex_parametarized, "~> 0.4.0"}
   ]
 end
 ```
