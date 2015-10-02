@@ -1,7 +1,7 @@
 defmodule ExParametarized.Mixfile do
   use Mix.Project
 
-  @version "0.3.1"
+  @version "0.4.0"
 
   def project do
     [
@@ -25,7 +25,7 @@ defmodule ExParametarized.Mixfile do
   defp deps do
     [
       {:earmark, "~> 0.1", only: :dev},
-      {:ex_doc, "~> 0.9", only: :dev}
+      {:ex_doc, "~> 0.10", only: :dev}
     ]
   end
 
