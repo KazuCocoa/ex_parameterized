@@ -11,7 +11,11 @@ defmodule ExUnit.Parametarized do
         use ExUnit.Case, async: true
         use ExUnit.Parametarized
 
-        test_with_params "describe description1",
+        setup do
+          {:ok, [value: 1]}
+        end
+
+        test_with_params "describe description",
           fn (a, b, expected) ->
             assert a + b == expected
           end do
@@ -20,29 +24,29 @@ defmodule ExUnit.Parametarized do
             ]
         end
 
-        test_with_params "describe description2",
-          fn (a, b, expected) ->
-            assert a <> " and " <> b == expected
-          end do
-            [
-              {"dog",   "cats",  "dog and cats"},
-              {"hello", "world", "hello and world"}
-            ]
-        end
-
-        test_with_params "add description for each params",
+        test_with_params "mixed no desc and with desc for each params",
           fn (a, b, expected) ->
             str = a <> " and " <> b
             assert str == expected
           end do
             [
-              "description for param1": {"dog", "cats", "dog and cats"},
-              "description for param2": {"hello", "world", "hello and world"}
+              {"dog", "cats", "dog and cats"}, # no description
+              "description for param2": {"hello", "world", "hello and world"} # with description
+            ]
+        end
+
+        # support Callback as `context`
+        test_with_params "add params with context", context,
+          fn (a, b, expected) ->
+            assert a + b == expected
+          end do
+            [
+              {context[:value], 2, 3}
             ]
         end
       end
 
-  Each test cases have number suffix when run them.
+  Each test cases have a number suffix when run them.
   So, if you failed test, then you can see which parameter is failed.
 
       defmodule MyExample.Test do
@@ -94,6 +98,7 @@ defmodule ExUnit.Parametarized do
     quote do
       import unquote(__MODULE__)
       import ExUnit.Parametarized.Params
+      import ExUnit.Parametarized.ParamsCallback
     end
   end
 end
