@@ -32,7 +32,7 @@ defmodule ExParametarized.Mixfile do
   defp package do
     [
       files: ~w(lib config mix.exs README.md LICENSE),
-      contributors: ["Kazuaki Matsuo"],
+      maintainers: ["Kazuaki Matsuo"],
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/KazuCocoa/ex_parametarized"}
     ]
