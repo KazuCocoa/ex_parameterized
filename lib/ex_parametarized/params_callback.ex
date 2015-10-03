@@ -1,7 +1,7 @@
 defmodule ExUnit.Parametarized.ParamsCallback do
   @moduledoc false
 
-  @spec test_with_params(bitstring, fun, any,[tuple]) :: any
+  @spec test_with_params(bitstring, any, fun ,[tuple]) :: any
   defmacro test_with_params(desc, context, fun, params) do
     Keyword.get(params, :do, nil)
     |> param_with_index
