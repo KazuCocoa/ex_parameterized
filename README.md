@@ -21,7 +21,7 @@ First, add Reporter to your mix.exs dependencies:
 ```
 def deps do
   [
-    {:ex_parametarized, "~> 0.4.0"}
+    {:ex_parametarized, "~> 0.4.1"}
   ]
 end
 ```
