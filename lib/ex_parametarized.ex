@@ -65,14 +65,14 @@ defmodule ExUnit.Parametarized do
 
   The result is...
 
-    1) test add params_num1 (MyExample.Test)
-       test/my_example_test.exs:5
-       Assertion with == failed
-       code: a + b == expected
-       lhs:  2
-       rhs:  3
-       stacktrace:
-         test/ex_parametarized_test.exs:5
+      1) test add params_num1 (MyExample.Test)
+         test/my_example_test.exs:5
+         Assertion with == failed
+         code: a + b == expected
+         lhs:  2
+         rhs:  3
+         stacktrace:
+           test/ex_parametarized_test.exs:5
 
 
   You can skip test with `@tag :skip` or `@tag skip: "If failed to skip, fail test"`.
