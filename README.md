@@ -5,10 +5,15 @@ ExParametarized
 
 This library support parametarized test with `test_with_params` macro.
 
+### Support
+- `test` macro provided by ExUnit.Case and ExUnit.CaseTemplate
+- `Callback` like `setup` provided by ExUnit.Callback
+
+
 ## Demo
 
 Clone this repository and run test with `mix test`.
-Please see `test/ex_parametarized_test.exs`.
+You can see some example in `test/ex_parametarized_*.exs`
 
 ## Usage
 
