@@ -9,8 +9,4 @@ elixir:
 sudo: false
 
 before_script:
-  - mix local.hex --force
   - mix do deps.get -- only test
-
-script:
-  - mix test
