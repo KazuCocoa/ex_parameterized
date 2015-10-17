@@ -2,6 +2,16 @@ defmodule ExParametarizedTest do
   use ExUnit.Case, async: true
   use ExUnit.Parametarized
 
+  # AST of "ast format when one param" test is the bellow.
+  # {:test_with_params,
+  #  [context: ExParametarizedTest, import: ExUnit.Parametarized.Params],
+  #  ["ast test",
+  #   {:fn, [],
+  #    [{:->, [],
+  #      [[{:a, [], ExParametarizedTest}],
+  #       {:==, [context: ExParametarizedTest, import: Kernel],
+  #        [{:a, [], ExParametarizedTest}, "test"]}]}]},
+  #   [do: [{:{}, [], ["test"]}]]]}
   test "ast format when one param" do
     import ExUnit.Parametarized.Params
     assert (
@@ -17,6 +27,18 @@ defmodule ExParametarizedTest do
         """
   end
 
+  # AST of "ast format when one param" test is the bellow.
+  # {:test_with_params,
+  #  [context: ExParametarizedTest, import: ExUnit.Parametarized.Params],
+  #  ["ast test",
+  #   {:fn, [],
+  #    [{:->, [],
+  #      [[{:a, [], ExParametarizedTest}, {:b, [], ExParametarizedTest}],
+  #       {:assert, [context: ExParametarizedTest, import: ExUnit.Assertions],
+  #        [{:==, [context: ExParametarizedTest, import: Kernel],
+  #          [{:+, [context: ExParametarizedTest, import: Kernel],
+  #            [{:a, [], ExParametarizedTest}, {:b, [], ExParametarizedTest}]},
+  #           2]}]}]}]}, [do: [{1, 2}]]]}
   test "ast format when two param" do
     import ExUnit.Parametarized.Params
     assert (
@@ -25,6 +47,8 @@ defmodule ExParametarizedTest do
           [{1, 2}]
         end
       end
+      |> IO.inspect
+
       |> Macro.to_string) == String.strip ~S"""
         test_with_params("ast test", fn a, b -> assert(a + b == 2) end) do
           [{1, 2}]
