@@ -1,6 +1,8 @@
 ExParametarized
 ===============
 
+[![Build Status](https://travis-ci.org/KazuCocoa/ex_parametarized.svg)](https://travis-ci.org/KazuCocoa/ex_parametarized)
+
 ## Description
 
 This library support parametarized test with `test_with_params` macro.
