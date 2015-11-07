@@ -1,7 +1,7 @@
 defmodule ExParametarized.Mixfile do
   use Mix.Project
 
-  @version "0.4.1"
+  @version "1.0.0"
 
   def project do
     [
@@ -31,7 +31,7 @@ defmodule ExParametarized.Mixfile do
 
   defp package do
     [
-      files: ~w(lib config mix.exs README.md LICENSE),
+      files: ~w(lib mix.exs README.md LICENSE),
       maintainers: ["Kazuaki Matsuo"],
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/KazuCocoa/ex_parametarized"}

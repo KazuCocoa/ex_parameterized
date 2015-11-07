@@ -47,7 +47,6 @@ defmodule ExParametarizedTest do
           [{1, 2}]
         end
       end
-      |> IO.inspect
 
       |> Macro.to_string) == String.strip ~S"""
         test_with_params("ast test", fn a, b -> assert(a + b == 2) end) do
