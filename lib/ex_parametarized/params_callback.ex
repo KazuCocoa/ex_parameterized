@@ -26,9 +26,7 @@ defmodule ExUnit.Parametarized.ParamsCallback do
 
   defp run(desc, context, fun, params) do
     quote do
-      test unquote(desc), unquote(context) do
-        unquote(fun).(unquote_splicing(params))
-      end
+      test unquote(desc), unquote(context), do: unquote(fun).(unquote_splicing(params))
     end
   end
 
