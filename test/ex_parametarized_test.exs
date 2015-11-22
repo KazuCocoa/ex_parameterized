@@ -70,10 +70,12 @@ defmodule ExParametarizedTest do
       assert a == 1
     end do
       [
-        {1},
+        {return_one}, # Can set other functions
         "two values": {1}
       ]
   end
+  defp return_one, do: 1
+
 
   test_with_params "compare two values",
     fn (a, expected) ->
@@ -81,9 +83,10 @@ defmodule ExParametarizedTest do
     end do
       [
         {1, 1},
-        "two values": {"hello", "hello"}
+        "two values": {return_hello, "hello"}  # Can set other functions
       ]
   end
+  defp return_hello, do: "hello"
 
   test_with_params "add params",
     fn (a, b, expected) ->

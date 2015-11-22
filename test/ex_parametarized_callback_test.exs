@@ -61,10 +61,12 @@ defmodule ExParametarizedParamsCallbackTest do
       assert a == expected
     end do
       [
-        {context[:value], 1},
-        "two values": {context[:hello], "world"}
+        {context[:value], return_one}, # Can set other functions
+        "two values": {context[:hello], return_world} # Can set other functions
       ]
   end
+  defp return_one, do: 1
+  defp return_world, do: "world"
 
   test_with_params "add params with context", context,
     fn (a, b, expected) ->
