@@ -1,13 +1,13 @@
-defmodule ExParametarizedParamsCallbackTest do
+defmodule ExParameterizedParamsCallbackTest do
   use ExUnit.Case, async: true
-  use ExUnit.Parametarized
+  use ExUnit.Parameterized
 
   setup do
     {:ok, [hello: "world", value: 1, bool: false]}
   end
 
   test "ast format when one param with context" do
-    import ExUnit.Parametarized.ParamsCallback
+    import ExUnit.Parameterized.ParamsCallback
     assert (
       quote do
         test_with_params "ast test", context, fn (a) -> a == "test" end do
@@ -22,7 +22,7 @@ defmodule ExParametarizedParamsCallbackTest do
   end
 
   test "ast format when two param with context" do
-    import ExUnit.Parametarized.ParamsCallback
+    import ExUnit.Parameterized.ParamsCallback
     assert (
       quote do
         test_with_params "ast test", context, fn (a, b) -> assert a + b == 2 end do

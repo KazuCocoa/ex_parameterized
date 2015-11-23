@@ -1,4 +1,4 @@
-defmodule ExUnit.Parametarized.ParamsCallback do
+defmodule ExUnit.Parameterized.ParamsCallback do
   @moduledoc false
 
   @spec test_with_params(bitstring, any, fun ,[tuple]) :: any

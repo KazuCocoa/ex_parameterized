@@ -1,4 +1,4 @@
-defmodule ExParametarizedTestCaseTest do
+defmodule ExParameterizedTestCaseTest do
   use ExUnit.CaseTemplate
 
   setup do
@@ -6,9 +6,9 @@ defmodule ExParametarizedTestCaseTest do
   end
 end
 
-defmodule ExParametarizedTestCaseTest.MyTest  do
-  use ExParametarizedTestCaseTest, async: true
-  use ExUnit.Parametarized
+defmodule ExParameterizedTestCaseTest.MyTest  do
+  use ExParameterizedTestCaseTest, async: true
+  use ExUnit.Parameterized
 
   test_with_params "provide one param with context on test template", context,
     fn (a) ->

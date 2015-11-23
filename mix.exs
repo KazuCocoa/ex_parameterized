@@ -1,16 +1,16 @@
-defmodule ExParametarized.Mixfile do
+defmodule ExParameterized.Mixfile do
   use Mix.Project
 
   @version "1.0.0"
 
   def project do
     [
-      app: :ex_parametarized,
+      app: :ex_parameterized,
       version: @version,
       elixir: "~> 1.0",
-      name: "ExParametarized",
-      source_url: "https://github.com/KazuCocoa/ex_parametarized",
-      description: "Simple macro for parametarized testing",
+      name: "ExParameterized",
+      source_url: "https://github.com/KazuCocoa/ex_parameterized",
+      description: "Simple macro for parameterized testing",
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env == :prod,
       deps: deps,
@@ -34,7 +34,7 @@ defmodule ExParametarized.Mixfile do
       files: ~w(lib mix.exs README.md LICENSE),
       maintainers: ["Kazuaki Matsuo"],
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/KazuCocoa/ex_parametarized"}
+      links: %{"GitHub" => "https://github.com/KazuCocoa/ex_parameterized"}
     ]
   end
 end

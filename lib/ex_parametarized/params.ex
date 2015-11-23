@@ -1,4 +1,4 @@
-defmodule ExUnit.Parametarized.Params do
+defmodule ExUnit.Parameterized.Params do
   @moduledoc false
 
   @spec test_with_params(bitstring, fun, [tuple]) :: any

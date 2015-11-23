@@ -1,19 +1,19 @@
-defmodule ExParametarizedTest do
+defmodule ExParameterizedTest do
   use ExUnit.Case, async: true
-  use ExUnit.Parametarized
+  use ExUnit.Parameterized
 
   # AST of "ast format when one param" test is the bellow.
   # {:test_with_params,
-  #  [context: ExParametarizedTest, import: ExUnit.Parametarized.Params],
+  #  [context: ExParameterizedTest, import: ExUnit.Parameterized.Params],
   #  ["ast test",
   #   {:fn, [],
   #    [{:->, [],
-  #      [[{:a, [], ExParametarizedTest}],
-  #       {:==, [context: ExParametarizedTest, import: Kernel],
-  #        [{:a, [], ExParametarizedTest}, "test"]}]}]},
+  #      [[{:a, [], ExParameterizedTest}],
+  #       {:==, [context: ExParameterizedTest, import: Kernel],
+  #        [{:a, [], ExParameterizedTest}, "test"]}]}]},
   #   [do: [{:{}, [], ["test"]}]]]}
   test "ast format when one param" do
-    import ExUnit.Parametarized.Params
+    import ExUnit.Parameterized.Params
     assert (
       quote do
         test_with_params "ast test", fn (a) -> a == "test" end do
@@ -29,18 +29,18 @@ defmodule ExParametarizedTest do
 
   # AST of "ast format when one param" test is the bellow.
   # {:test_with_params,
-  #  [context: ExParametarizedTest, import: ExUnit.Parametarized.Params],
+  #  [context: ExParameterizedTest, import: ExUnit.Parameterized.Params],
   #  ["ast test",
   #   {:fn, [],
   #    [{:->, [],
-  #      [[{:a, [], ExParametarizedTest}, {:b, [], ExParametarizedTest}],
-  #       {:assert, [context: ExParametarizedTest, import: ExUnit.Assertions],
-  #        [{:==, [context: ExParametarizedTest, import: Kernel],
-  #          [{:+, [context: ExParametarizedTest, import: Kernel],
-  #            [{:a, [], ExParametarizedTest}, {:b, [], ExParametarizedTest}]},
+  #      [[{:a, [], ExParameterizedTest}, {:b, [], ExParameterizedTest}],
+  #       {:assert, [context: ExParameterizedTest, import: ExUnit.Assertions],
+  #        [{:==, [context: ExParameterizedTest, import: Kernel],
+  #          [{:+, [context: ExParameterizedTest, import: Kernel],
+  #            [{:a, [], ExParameterizedTest}, {:b, [], ExParameterizedTest}]},
   #           2]}]}]}]}, [do: [{1, 2}]]]}
   test "ast format when two param" do
-    import ExUnit.Parametarized.Params
+    import ExUnit.Parameterized.Params
     assert (
       quote do
         test_with_params "ast test", fn (a, b) -> assert a + b == 2 end do

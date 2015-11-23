@@ -1,15 +1,15 @@
-defmodule ExUnit.Parametarized do
+defmodule ExUnit.Parameterized do
   @moduledoc """
-  ExUnit.Parametarized support parametarized test with ExUnit.
+  ExUnit.Parameterized support parameterized test with ExUnit.
   Macro of `test_with_params` run standard `test` macro in it.
 
   ## Examples
 
-  You can run parametarized test with a `test_with_params` macro:
+  You can run parameterized test with a `test_with_params` macro:
 
       defmodule MyExample.Test do
         use ExUnit.Case, async: true
-        use ExUnit.Parametarized
+        use ExUnit.Parameterized
 
         setup do
           {:ok, [value: 1]}
@@ -51,7 +51,7 @@ defmodule ExUnit.Parametarized do
 
       defmodule MyExample.Test do
         use ExUnit.Case, async: true
-        use ExUnit.Parametarized
+        use ExUnit.Parameterized
 
         test_with_params "describe description1",
           fn (a, b, expected) ->
@@ -72,7 +72,7 @@ defmodule ExUnit.Parametarized do
          lhs:  2
          rhs:  3
          stacktrace:
-           test/ex_parametarized_test.exs:5
+           test/ex_parameterized_test.exs:5
 
 
   You can skip test with `@tag :skip` or `@tag skip: "If failed to skip, fail test"`.
@@ -80,7 +80,7 @@ defmodule ExUnit.Parametarized do
 
       defmodule MyExample.Test do
         use ExUnit.Case, async: true
-        use ExUnit.Parametarized
+        use ExUnit.Parameterized
 
         @tag skip: "If failed to skip, fail test"
         test_with_params "skipped test",
@@ -97,8 +97,8 @@ defmodule ExUnit.Parametarized do
   defmacro __using__(_) do
     quote do
       import unquote(__MODULE__)
-      import ExUnit.Parametarized.Params
-      import ExUnit.Parametarized.ParamsCallback
+      import ExUnit.Parameterized.Params
+      import ExUnit.Parameterized.ParamsCallback
     end
   end
 end
