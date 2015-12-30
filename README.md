@@ -2,6 +2,7 @@ ExParameterized
 ===============
 
 [![Build Status](https://travis-ci.org/KazuCocoa/ex_parameterized.svg)](https://travis-ci.org/KazuCocoa/ex_parameterized)
+[![](https://img.shields.io/hexpm/v/ex_parameterized.svg?style=flat)](https://hex.pm/packages/ex_parameterized)
 
 ## Description
 
