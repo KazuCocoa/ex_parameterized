@@ -65,7 +65,7 @@ defmodule ExUnit.Parameterized do
 
   The result is...
 
-      1) test add params_num1 (MyExample.Test)
+      1) test 'add params': numbr of 1 (MyExample.Test)
          test/my_example_test.exs:5
          Assertion with == failed
          code: a + b == expected

@@ -1,5 +1,5 @@
 defmodule ExParameterizedTest do
-  use ExUnit.Case, async: true
+  use ShouldI
   use ExUnit.Parameterized
 
   # AST of "ast format when one param" test is the bellow.
@@ -65,36 +65,37 @@ defmodule ExParameterizedTest do
       ]
   end
 
-  test_with_params "provide one param",
-    fn (a) ->
-      assert a == 1
-    end do
-      [
-        {return_one}, # Can set other functions
-        "two values": {1}
-      ]
-  end
-  defp return_one, do: 1
+  having "example with shouldi" do
+    test_with_params "provide one param",
+      fn (a) ->
+        assert a == 1
+      end do
+        [
+          {return_one}, # Can set other functions
+          "two values": {1}
+        ]
+    end
+    defp return_one, do: 1
 
+    test_with_params "compare two values",
+      fn (a, expected) ->
+        assert a == expected
+      end do
+        [
+          {1, 1},
+          "two values": {return_hello, "hello"}  # Can set other functions
+        ]
+    end
+    defp return_hello, do: "hello"
 
-  test_with_params "compare two values",
-    fn (a, expected) ->
-      assert a == expected
-    end do
-      [
-        {1, 1},
-        "two values": {return_hello, "hello"}  # Can set other functions
-      ]
-  end
-  defp return_hello, do: "hello"
-
-  test_with_params "add params",
-    fn (a, b, expected) ->
-      assert a + b == expected
-    end do
-      [
-        {1, 2, 3}
-      ]
+    test_with_params "add params",
+      fn (a, b, expected) ->
+        assert a + b == expected
+      end do
+        [
+          {1, 2, 3}
+        ]
+    end
   end
 
   test_with_params "create wordings",

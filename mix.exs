@@ -24,6 +24,7 @@ defmodule ExParameterized.Mixfile do
 
   defp deps do
     [
+      {:shouldi, "~> 0.3.0", only: :test},
       {:earmark, "~> 0.1", only: :dev},
       {:ex_doc, "~> 0.10", only: :dev}
     ]
