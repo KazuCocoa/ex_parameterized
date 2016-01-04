@@ -29,7 +29,7 @@ First, add Reporter to your mix.exs dependencies:
 ```
 def deps do
   [
-    {:ex_parameterized, "~> 1.0.1"}
+    {:ex_parameterized, "~> 1.0.2"}
   ]
 end
 ```
