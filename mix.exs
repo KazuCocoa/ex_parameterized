@@ -1,12 +1,10 @@
 defmodule ExParameterized.Mixfile do
   use Mix.Project
 
-  @version "1.0.1"
-
   def project do
     [
       app: :ex_parameterized,
-      version: @version,
+      version: "1.0.2",
       elixir: "~> 1.0",
       name: "ExParameterized",
       source_url: "https://github.com/KazuCocoa/ex_parameterized",
