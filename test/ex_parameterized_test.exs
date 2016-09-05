@@ -140,4 +140,10 @@ defmodule ExParameterizedTest do
       ]
   end
 
+  test_with_params "ast from enum",
+    fn (a) ->
+      assert a == ["a", "b"]
+    end do
+      Enum.map([{["a", "b"]}], fn (x) -> x end)
+  end
 end
