@@ -44,6 +44,14 @@ defmodule ExUnit.Parameterized do
               {context[:value], 2, 3}
             ]
         end
+
+        # Be able to use enum as parameters
+        test_with_params "ast from enum",
+          fn (a) ->
+            assert a == ["a", "b"]
+          end do
+            Enum.map([{["a", "b"]}], fn (x) -> x end)
+        end
       end
 
   Each test cases have a number suffix when run them.
