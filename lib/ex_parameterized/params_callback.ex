@@ -3,20 +3,21 @@ defmodule ExUnit.Parameterized.ParamsCallback do
 
   @spec test_with_params(bitstring, any, fun ,[tuple]) :: any
   defmacro test_with_params(desc, context, fun, params_ast) do
-    a = try do
+    try do
       {params, _} = Code.eval_quoted params_ast
-      params
+      Keyword.get(params, :do, nil)
+      |> param_with_index
+      |> Enum.map(fn(test_param)->
+           test_with(desc, context, fun, test_param)
+         end)
     rescue
       _ ->
-        params_ast
+        Keyword.get(params_ast, :do, nil)
+        |> param_with_index
+        |> Enum.map(fn(test_param)->
+             test_with(desc, context, fun, test_param)
+           end)
     end
-
-    Keyword.get(params, :do, nil)
-    |> param_with_index
-    |> Enum.map(fn(test_param)->
-         test_with(desc, context, fun, test_param)
-       end)
-
   end
 
   defp test_with(desc, context, fun, {{param_desc, {_, _, values}}, num}) when is_atom(param_desc) do
