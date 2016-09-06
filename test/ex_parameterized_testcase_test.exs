@@ -19,4 +19,11 @@ defmodule ExParameterizedTestCaseTest.MyTest  do
         "two values": {context[:value]}
       ]
   end
+
+  test_with_params "ast from enum", context,
+    fn (a) ->
+      assert a == [context[:hello], context[:value]]
+    end do
+      Enum.map([{["world", 1]}], fn (x) -> x end)
+  end
 end
