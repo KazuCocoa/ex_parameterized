@@ -11,8 +11,8 @@ defmodule ExParameterized.Mixfile do
       description: "Simple macro for parameterized testing",
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env == :prod,
-      deps: deps,
-      package: package
+      deps: deps(),
+      package: package()
     ]
   end
 

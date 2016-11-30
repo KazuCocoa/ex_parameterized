@@ -71,7 +71,7 @@ defmodule ExParameterizedTest do
         assert a == 1
       end do
         [
-          {return_one}, # Can set other functions
+          {return_one()}, # Can set other functions
           "two values": {1}
         ]
     end
@@ -83,7 +83,7 @@ defmodule ExParameterizedTest do
       end do
         [
           {1, 1},
-          "two values": {return_hello, "hello"}  # Can set other functions
+          "two values": {return_hello(), "hello"}  # Can set other functions
         ]
     end
     defp return_hello, do: "hello"

@@ -51,8 +51,8 @@ defmodule ExParameterizedParamsCallbackTest do
       assert a == 1
     end do
       [
-        {context[:value]},
-        "two values": {context[:value]}
+        { context[:value] },
+        "two values": { context[:value] }
       ]
   end
 
@@ -61,8 +61,8 @@ defmodule ExParameterizedParamsCallbackTest do
       assert a == expected
     end do
       [
-        {context[:value], return_one}, # Can set other functions
-        "two values": {context[:hello], return_world} # Can set other functions
+        {context[:value], return_one()}, # Can set other functions
+        "two values": {context[:hello], return_world()} # Can set other functions
       ]
   end
   defp return_one, do: 1

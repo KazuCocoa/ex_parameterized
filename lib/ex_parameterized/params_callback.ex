@@ -4,16 +4,17 @@ defmodule ExUnit.Parameterized.ParamsCallback do
   @spec test_with_params(bitstring, any, fun ,[tuple]) :: any
   defmacro test_with_params(desc, context, fun, params_ast) do
     try do
-      {params, _} = Code.eval_quoted params_ast
+      {params, _} = params_ast |> Code.eval_quoted
       Keyword.get(params, :do, nil)
-      |> param_with_index
+      |> param_with_index()
       |> Enum.map(fn(test_param)->
            test_with(desc, context, fun, test_param)
          end)
     rescue
       _ ->
-        Keyword.get(params_ast, :do, nil)
-        |> param_with_index
+        params_ast
+        |> Keyword.get(:do, nil)
+        |> param_with_index()
         |> Enum.map(fn(test_param)->
              test_with(desc, context, fun, test_param)
            end)

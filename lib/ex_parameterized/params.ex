@@ -6,15 +6,15 @@ defmodule ExUnit.Parameterized.Params do
     try do
       {params, _} = Code.eval_quoted params_ast
       Keyword.get(params, :do, nil)
-      |> param_with_index
-      |> Enum.map(fn(test_param)->
+      |> param_with_index()
+      |> Enum.map(fn (test_param)->
            test_with(desc, fun, test_param)
          end)
     rescue
       _ ->
         Keyword.get(params_ast, :do, nil)
-        |> param_with_index
-        |> Enum.map(fn(test_param)->
+        |> param_with_index()
+        |> Enum.map(fn (test_param)->
              test_with(desc, fun, test_param)
            end)
     end
