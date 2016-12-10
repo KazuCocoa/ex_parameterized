@@ -30,14 +30,17 @@ defmodule ExUnit.Parameterized.ParamsCallback do
     run("'#{desc}': '#{param_desc}': number of #{num}", context, fun, Tuple.to_list(values))
   end
 
-  defp test_with(desc, context, fun, {{_, _, values}, num}), do: run("'#{desc}': number of #{num}", context, fun, values)
+  defp test_with(desc, context, fun, {{_, _, values}, num}),
+    do: run("'#{desc}': number of #{num}", context, fun, values)
 
   # Quote literals case : http://elixir-lang.org/docs/master/elixir/Kernel.SpecialForms.html#quote/2
-  defp test_with(desc, context, fun, {values, num}), do: run("'#{desc}': number of #{num}", context, fun, Tuple.to_list(values))
+  defp test_with(desc, context, fun, {values, num}),
+    do: run("'#{desc}': number of #{num}", context, fun, Tuple.to_list(values))
 
   defp run(desc, context, fun, params) do
     quote do
-      test unquote(desc), unquote(context), do: unquote(fun).(unquote_splicing(params))
+      test unquote(desc), unquote(context),
+        do: unquote(fun).(unquote_splicing(params))
     end
   end
 
