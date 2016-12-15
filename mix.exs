@@ -4,7 +4,7 @@ defmodule ExParameterized.Mixfile do
   def project do
     [
       app: :ex_parameterized,
-      version: "1.1.0",
+      version: "1.2.0",
       elixir: "~> 1.0",
       name: "ExParameterized",
       source_url: "https://github.com/KazuCocoa/ex_parameterized",
