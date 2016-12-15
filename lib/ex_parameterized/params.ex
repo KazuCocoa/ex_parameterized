@@ -3,21 +3,28 @@ defmodule ExUnit.Parameterized.Params do
 
   @spec test_with_params(bitstring, fun, [tuple]) :: any
   defmacro test_with_params(desc, fun, params_ast) do
-    try do
-      {params, _} = Code.eval_quoted params_ast
-      Keyword.get(params, :do, nil)
-      |> param_with_index()
-      |> Enum.map(fn (test_param)->
-           test_with(desc, fun, test_param)
-         end)
-    rescue
+    ast = Keyword.get(params_ast, :do, nil)
+
+    case ast do
+      [{:{}, _, [{:%{}, _, _}]}] -> # for Map
+        ast |> do_test_with(desc, fun)
       _ ->
-        Keyword.get(params_ast, :do, nil)
-        |> param_with_index()
-        |> Enum.map(fn (test_param)->
-             test_with(desc, fun, test_param)
-           end)
+        try do
+          {params, _} = Code.eval_quoted params_ast
+          Keyword.get(params, :do, nil) |> do_test_with(desc, fun)
+        rescue
+          _ ->
+            ast |> do_test_with(desc, fun)
+        end
     end
+  end
+
+  defp do_test_with(ast, desc, fun) do
+    ast
+    |> param_with_index()
+    |> Enum.map(fn (param)->
+         test_with(desc, fun, param)
+       end)
   end
 
   defp test_with(desc, fun, {{param_desc, {_, _, values}}, num}) when is_atom(param_desc) do
