@@ -14,7 +14,7 @@ defmodule ExParameterizedParamsCallbackTest do
           [{"test"}]
         end
       end
-      |> Macro.to_string) == String.strip ~S"""
+      |> Macro.to_string) == String.trim ~S"""
         test_with_params("ast test", context, fn a -> a == "test" end) do
           [{"test"}]
         end
@@ -29,7 +29,7 @@ defmodule ExParameterizedParamsCallbackTest do
           [{1, 2}]
         end
       end
-      |> Macro.to_string) == String.strip ~S"""
+      |> Macro.to_string) == String.trim ~S"""
         test_with_params("ast test", context, fn a, b -> assert(a + b == 2) end) do
           [{1, 2}]
         end
