@@ -1,5 +1,5 @@
 defmodule ExParameterizedTest do
-  use ShouldI
+  use ExUnit.Case
   use ExUnit.Parameterized
 
   # AST of "ast format when one param" test is the bellow.
@@ -20,7 +20,7 @@ defmodule ExParameterizedTest do
           [{"test"}]
         end
       end
-      |> Macro.to_string) == String.strip ~S"""
+      |> Macro.to_string) == String.trim ~S"""
         test_with_params("ast test", fn a -> a == "test" end) do
           [{"test"}]
         end
@@ -48,7 +48,7 @@ defmodule ExParameterizedTest do
         end
       end
 
-      |> Macro.to_string) == String.strip ~S"""
+      |> Macro.to_string) == String.trim ~S"""
         test_with_params("ast test", fn a, b -> assert(a + b == 2) end) do
           [{1, 2}]
         end
@@ -75,7 +75,7 @@ defmodule ExParameterizedTest do
       ]
   end
 
-  having "example with shouldi" do
+  describe "example with shouldi" do
     test_with_params "provide one param",
       fn (a) ->
         assert a == 1
