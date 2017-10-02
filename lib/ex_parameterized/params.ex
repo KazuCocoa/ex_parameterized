@@ -8,8 +8,20 @@ defmodule ExUnit.Parameterized.Params do
     case ast do
       [{:{}, _, [{:%{}, _, _}]}] -> # for Map
         ast |> do_test_with(desc, fun)
+      {:@, _, [{atom, _, _}]} -> # for @param
+        IO.inspect params_ast
+        IO.inspect ast # {:@, [line: 165], [{:params, [line: 165], nil}]}
+        IO.inspect Macro.to_string(ast) # "@param"
+
+        quote do
+          attr = Module.get_attribute(unquote(__CALLER__.module), unquote(atom))
+          IO.inspect attr # [{1}]
+          # memo:
+          # call "test_with_params(desc, fun, attr)"
+        end
       _ ->
         try do
+          IO.inspect Macro.to_string(ast)
           {params, _} = Code.eval_quoted params_ast
           Keyword.get(params, :do, nil) |> do_test_with(desc, fun)
         rescue
