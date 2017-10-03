@@ -159,7 +159,7 @@ defmodule ExParameterizedTest do
 
   @params [{1}]
   test_with_params "bad",
-    fn p ->
+    fn (a) ->
       assert a == 1
     end do
       @params
@@ -167,7 +167,7 @@ defmodule ExParameterizedTest do
 
   @params2 [{1}, {1}]
   test_with_params "bad",
-    fn p ->
+    fn (a) ->
       assert a == 1
     end do
       @params2

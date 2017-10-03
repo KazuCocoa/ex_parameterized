@@ -9,22 +9,18 @@ defmodule ExUnit.Parameterized.Params do
       [{:{}, _, [{:%{}, _, _}]}] -> # for Map
         ast |> do_test_with(desc, fun)
       {:@, _, [{atom, _, _}]} -> # for @param
-        IO.inspect params_ast
-        IO.inspect ast # {:@, [line: 165], [{:params, [line: 165], nil}]}
-
-        IO.inspect Macro.to_string(desc) # "\"bad\""
-        IO.inspect Macro.to_string(fun) # fn p -> assert(a == 1) end"
-        IO.inspect Macro.to_string(params_ast) # "[do: @params]"
-        IO.inspect Macro.to_string(ast) # "@params"
-
         quote do
           attr = Module.get_attribute(unquote(__CALLER__.module), unquote(atom))
-          IO.inspect attr # [{1}]
+                 |> Macro.escape
+
+          # [{:test, [],
+          #   ["'bad': number of 0",
+          #     [do: {{:., [],
+          #       [#Function<1.14669326 in file:test/ex_parameterized_test.exs>]}, [],
+          #         [1]}]]}]
+          do_test_with(attr, unquote(desc), unquote(fun))
+          # If we can run the above AST, test will run.
         end
-
-        # memo: I'd like to call the following here.
-        # test_with_params("bad", fn p -> assert(a == 1) end, [{1}])
-
       _ ->
         try do
           {params, _} = Code.eval_quoted params_ast
@@ -36,7 +32,7 @@ defmodule ExUnit.Parameterized.Params do
     end
   end
 
-  defp do_test_with(ast, desc, fun) do
+  def do_test_with(ast, desc, fun) do
     ast
     |> param_with_index()
     |> Enum.map(fn (param)->
