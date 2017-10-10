@@ -1,13 +1,14 @@
 defmodule ExUnit.Parameterized.ParamsCallback do
   @moduledoc false
 
-  @spec test_with_params(bitstring, any, fun ,[tuple]) :: any
+  @spec test_with_params(bitstring, any, fun, [tuple]) :: any
   defmacro test_with_params(desc, context, fun, params_ast) do
     try do
-      {params, _} = params_ast |> Code.eval_quoted
+      {params, _} = params_ast |> Code.eval_quoted()
+
       Keyword.get(params, :do, nil)
       |> param_with_index()
-      |> Enum.map(fn(test_param)->
+      |> Enum.map(fn test_param ->
            test_with(desc, context, fun, test_param)
          end)
     rescue
@@ -15,7 +16,7 @@ defmodule ExUnit.Parameterized.ParamsCallback do
         params_ast
         |> Keyword.get(:do, nil)
         |> param_with_index()
-        |> Enum.map(fn(test_param)->
+        |> Enum.map(fn test_param ->
              test_with(desc, context, fun, test_param)
            end)
     end
@@ -39,12 +40,11 @@ defmodule ExUnit.Parameterized.ParamsCallback do
 
   defp run(desc, context, fun, params) do
     quote do
-      test unquote(desc), unquote(context),
-        do: unquote(fun).(unquote_splicing(params))
+      test(unquote(desc), unquote(context), do: unquote(fun).(unquote_splicing(params)))
     end
   end
 
   defp param_with_index(list) do
-    Enum.zip list, 0..Enum.count(list)
+    Enum.zip(list, 0..Enum.count(list))
   end
 end
