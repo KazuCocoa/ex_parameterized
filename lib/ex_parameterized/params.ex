@@ -6,7 +6,8 @@ defmodule ExUnit.Parameterized.Params do
     ast = Keyword.get(params_ast, :do, nil)
 
     case ast do
-      [{:{}, _, [{:%{}, _, _}]}] -> # for Map
+      # for Map
+      [{:{}, _, [{:%{}, _, _}]}] ->
         ast |> do_test_with(desc, fun)
       {:@, _, [{atom, _, _}]} -> # for @param
         quote do
@@ -23,7 +24,7 @@ defmodule ExUnit.Parameterized.Params do
         end
       _ ->
         try do
-          {params, _} = Code.eval_quoted params_ast
+          {params, _} = Code.eval_quoted(params_ast)
           Keyword.get(params, :do, nil) |> do_test_with(desc, fun)
         rescue
           _ ->
@@ -35,7 +36,7 @@ defmodule ExUnit.Parameterized.Params do
   def do_test_with(ast, desc, fun) do
     ast
     |> param_with_index()
-    |> Enum.map(fn (param)->
+    |> Enum.map(fn param ->
          test_with(desc, fun, param)
        end)
   end
@@ -58,12 +59,11 @@ defmodule ExUnit.Parameterized.Params do
 
   defp run(desc, fun, params) do
     quote do
-      test unquote(desc),
-        do: unquote(fun).(unquote_splicing(params))
+      test unquote(desc), do: unquote(fun).(unquote_splicing(params))
     end
   end
 
   defp param_with_index(list) do
-    Enum.zip list, 0..Enum.count(list)
+    Enum.zip(list, 0..Enum.count(list))
   end
 end
