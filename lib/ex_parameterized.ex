@@ -82,7 +82,7 @@ defmodule ExUnit.Parameterized do
          stacktrace:
            test/ex_parameterized_test.exs:5
 
-  
+
   You can skip test with `@tag :skip` or `@tag skip: "If failed to skip, fail test"`.
   (Require Elixir 1.1.0)
 
