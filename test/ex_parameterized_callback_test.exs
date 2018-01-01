@@ -119,18 +119,4 @@ defmodule ExParameterizedParamsCallbackTest do
       "description for param2": {"hello", context[:hello], "hello and world"}
     ]
   end
-
-  @params [{1}]
-  test_with_params "bad", context, fn a ->
-    assert a == 1
-  end do
-    @params
-  end
-
-  @params2 [{1}, {1}]
-  test_with_params "bad", context, fn a ->
-    assert a == 1
-  end do
-    @params2
-  end
 end
