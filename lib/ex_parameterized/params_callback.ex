@@ -10,22 +10,6 @@ defmodule ExUnit.Parameterized.ParamsCallback do
       [{:{}, _, [{:%{}, _, _}]}] ->
         ast |> do_test_with(desc, context, fun)
 
-      # for @param
-      {:@, _, [{atom, _, _}]} ->
-        quote do
-          attr =
-            Module.get_attribute(unquote(__CALLER__.module), unquote(atom))
-            |> Macro.escape()
-
-          # [{:test, [],
-          #   ["'bad': number of 0",
-          #     [do: {{:., [],
-          #       [#Function<1.14669326 in file:test/ex_parameterized_test.exs>]}, [],
-          #         [1]}]]}]
-          do_test_with(attr, unquote(desc), unquote(fun))
-          # If we can run the above AST, test will run.
-        end
-
       _ ->
         try do
           {params, _} = params_ast |> Code.eval_quoted()
@@ -40,7 +24,7 @@ defmodule ExUnit.Parameterized.ParamsCallback do
     end
   end
 
-  def do_test_with(ast, desc, context, fun) do
+  defp do_test_with(ast, desc, context, fun) do
     ast
     |> param_with_index()
     |> Enum.map(fn param ->
