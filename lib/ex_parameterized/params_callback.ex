@@ -3,23 +3,45 @@ defmodule ExUnit.Parameterized.ParamsCallback do
 
   @spec test_with_params(bitstring, any, fun, [tuple]) :: any
   defmacro test_with_params(desc, context, fun, params_ast) do
-    try do
-      {params, _} = params_ast |> Code.eval_quoted()
+    ast = Keyword.get(params_ast, :do, nil)
 
-      Keyword.get(params, :do, nil)
-      |> param_with_index()
-      |> Enum.map(fn test_param ->
-           test_with(desc, context, fun, test_param)
-         end)
-    rescue
+    case ast do
+      # for Map
+      [{:{}, _, [{:%{}, _, _}]}] ->
+        ast |> do_test_with(desc, context, fun)
+      {:@, _, [{atom, _, _}]} -> # for @param
+        quote do
+          attr = Module.get_attribute(unquote(__CALLER__.module), unquote(atom))
+                 |> Macro.escape
+
+          # [{:test, [],
+          #   ["'bad': number of 0",
+          #     [do: {{:., [],
+          #       [#Function<1.14669326 in file:test/ex_parameterized_test.exs>]}, [],
+          #         [1]}]]}]
+          do_test_with(attr, unquote(desc), unquote(fun))
+          # If we can run the above AST, test will run.
+        end
       _ ->
-        params_ast
-        |> Keyword.get(:do, nil)
-        |> param_with_index()
-        |> Enum.map(fn test_param ->
-             test_with(desc, context, fun, test_param)
-           end)
+        try do
+          {params, _} = params_ast |> Code.eval_quoted()
+
+          params
+          |> Keyword.get(:do, nil)
+          |> do_test_with(desc, context, fun)
+        rescue
+          _ ->
+            ast |> do_test_with(desc, context, fun)
+        end
     end
+  end
+
+  def do_test_with(ast, desc, context, fun) do
+    ast
+    |> param_with_index()
+    |> Enum.map(fn param ->
+         test_with(desc, context, fun, param)
+       end)
   end
 
   defp test_with(desc, context, fun, {{param_desc, {_, _, values}}, num}) when is_atom(param_desc) do

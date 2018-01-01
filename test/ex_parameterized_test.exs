@@ -156,4 +156,20 @@ defmodule ExParameterizedTest do
     end do
       Enum.map([{["a", "b"]}], fn (x) -> x end)
   end
+
+  @params [{1}]
+  test_with_params "bad",
+    fn (a) ->
+      assert a == 1
+    end do
+      @params
+  end
+
+  @params2 [{1}, {1}]
+  test_with_params "bad",
+    fn (a) ->
+      assert a == 1
+    end do
+      @params2
+  end
 end

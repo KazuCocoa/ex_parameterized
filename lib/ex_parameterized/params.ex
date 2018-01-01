@@ -9,7 +9,19 @@ defmodule ExUnit.Parameterized.Params do
       # for Map
       [{:{}, _, [{:%{}, _, _}]}] ->
         ast |> do_test_with(desc, fun)
+      {:@, _, [{atom, _, _}]} -> # for @param
+        quote do
+          attr = Module.get_attribute(unquote(__CALLER__.module), unquote(atom))
+                 |> Macro.escape
 
+          # [{:test, [],
+          #   ["'bad': number of 0",
+          #     [do: {{:., [],
+          #       [#Function<1.14669326 in file:test/ex_parameterized_test.exs>]}, [],
+          #         [1]}]]}]
+          do_test_with(attr, unquote(desc), unquote(fun))
+          # If we can run the above AST, test will run.
+        end
       _ ->
         try do
           {params, _} = Code.eval_quoted(params_ast)
@@ -21,7 +33,7 @@ defmodule ExUnit.Parameterized.Params do
     end
   end
 
-  defp do_test_with(ast, desc, fun) do
+  def do_test_with(ast, desc, fun) do
     ast
     |> param_with_index()
     |> Enum.map(fn param ->
