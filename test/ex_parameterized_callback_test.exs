@@ -119,4 +119,13 @@ defmodule ExParameterizedParamsCallbackTest do
       "description for param2": {"hello", context[:hello], "hello and world"}
     ]
   end
+
+  test_with_params "with function", fn p ->
+    p
+  end do
+    make = fn a -> a + 1 end
+    [
+      {make.(1)}
+    ]
+  end
 end
