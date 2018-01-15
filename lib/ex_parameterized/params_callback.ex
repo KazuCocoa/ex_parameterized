@@ -54,7 +54,10 @@ defmodule ExUnit.Parameterized.ParamsCallback do
     end
   end
 
-  defp param_with_index(list) do
+  defp param_with_index(list) when is_list(list) do
     Enum.zip(list, 0..Enum.count(list))
+  end
+  defp param_with_index(list) do
+    raise(ArgumentError, message: "Unsupported format")
   end
 end

@@ -153,4 +153,13 @@ defmodule ExParameterizedTest do
   end do
     Enum.map([{["a", "b"]}], fn x -> x end)
   end
+
+  test_with_params "with function", fn p ->
+      p
+  end do
+    make = fn a -> a + 1 end
+    [
+      {make.(1)}
+    ]
+  end
 end
