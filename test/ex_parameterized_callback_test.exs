@@ -38,7 +38,7 @@ defmodule ExParameterizedParamsCallbackTest do
              """)
   end
 
-  @tag skip: "If failed to skip, test will fai"
+  @tag skip: "If failed to skip, test will fail"
   test_with_params "skipped test with context", context, fn a ->
     assert a == true
   end do
