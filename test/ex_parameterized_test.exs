@@ -165,9 +165,10 @@ defmodule ExParameterizedTest do
   end
 
   test_with_params "with function", fn p ->
-      p
+    p
   end do
     make = fn a -> a + 1 end
+
     [
       {make.(1)}
     ]

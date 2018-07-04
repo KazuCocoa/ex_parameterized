@@ -8,6 +8,7 @@ defmodule ExUnit.Parameterized.ParamsCallback do
     case validate_map?(ast) do
       true ->
         ast |> do_test_with(desc, context, fun)
+
       false ->
         try do
           {params, _} = params_ast |> Code.eval_quoted()
@@ -26,18 +27,20 @@ defmodule ExUnit.Parameterized.ParamsCallback do
   defp validate_map?([], result) when is_list(result), do: true
   defp validate_map?([], _), do: false
   defp validate_map?([{:%{}, _, _}], _), do: true
+
   defp validate_map?(asts, result) when is_list(asts) do
     [head | tail] = asts
+
     case head do
       {_, _, [{:%{}, _, _}]} ->
+        tail |> validate_map?([head | result])
 
-        tail |> validate_map?([head|result])
       _ ->
         false
     end
   end
-  defp validate_map?(_asts, _result), do: false
 
+  defp validate_map?(_asts, _result), do: false
 
   defp do_test_with(ast, desc, context, fun) do
     ast
@@ -72,6 +75,7 @@ defmodule ExUnit.Parameterized.ParamsCallback do
   defp param_with_index(list) when is_list(list) do
     Enum.zip(list, 0..Enum.count(list))
   end
+
   defp param_with_index(_) do
     raise(ArgumentError, message: "Unsupported format")
   end

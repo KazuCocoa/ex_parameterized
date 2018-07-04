@@ -143,6 +143,7 @@ defmodule ExParameterizedParamsCallbackTest do
     p
   end do
     make = fn a -> a + 1 end
+
     [
       {make.(1)}
     ]
