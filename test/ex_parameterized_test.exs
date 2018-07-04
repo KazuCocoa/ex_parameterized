@@ -74,6 +74,16 @@ defmodule ExParameterizedTest do
     ]
   end
 
+  test_with_params "with two map values", fn a ->
+    assert a.b == 1
+    assert a.c == 2
+  end do
+    [
+      {%{b: 1, c: 2}},
+      {%{b: 1, c: 2}}
+    ]
+  end
+
   describe "example with shouldi" do
     test_with_params "provide one param", fn a ->
       assert a == 1

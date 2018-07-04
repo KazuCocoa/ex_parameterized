@@ -96,6 +96,25 @@ defmodule ExParameterizedParamsCallbackTest do
     ]
   end
 
+  test_with_params "with map value", context, fn a ->
+    assert a.b == 1
+    assert a.c == 2
+  end do
+    [
+      {%{b: 1, c: 2}}
+    ]
+  end
+
+  test_with_params "with two map values", context, fn a ->
+    assert a.b == 1
+    assert a.c == 2
+  end do
+    [
+      {%{b: 1, c: 2}},
+      {%{b: 1, c: 2}}
+    ]
+  end
+
   test_with_params "add description for each params with context", context, fn a, b, expected ->
     str = a <> " and " <> b
     assert str == expected

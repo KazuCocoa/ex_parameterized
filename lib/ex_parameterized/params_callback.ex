@@ -5,12 +5,10 @@ defmodule ExUnit.Parameterized.ParamsCallback do
   defmacro test_with_params(desc, context, fun, params_ast) do
     ast = Keyword.get(params_ast, :do, nil)
 
-    case ast do
-      # for Map
-      [{:{}, _, [{:%{}, _, _}]}] ->
+    case validate_map?(ast) do
+      true ->
         ast |> do_test_with(desc, context, fun)
-
-      _ ->
+      false ->
         try do
           {params, _} = params_ast |> Code.eval_quoted()
 
@@ -23,6 +21,23 @@ defmodule ExUnit.Parameterized.ParamsCallback do
         end
     end
   end
+
+  defp validate_map?(asts, result \\ [])
+  defp validate_map?([], result) when is_list(result), do: true
+  defp validate_map?([], _), do: false
+  defp validate_map?([{:%{}, _, _}], _), do: true
+  defp validate_map?(asts, result) when is_list(asts) do
+    [head | tail] = asts
+    case head do
+      {_, _, [{:%{}, _, _}]} ->
+
+        tail |> validate_map?([head|result])
+      _ ->
+        false
+    end
+  end
+  defp validate_map?(_asts, _result), do: false
+
 
   defp do_test_with(ast, desc, context, fun) do
     ast
