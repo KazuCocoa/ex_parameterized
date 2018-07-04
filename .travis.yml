@@ -3,9 +3,11 @@ language: elixir
 opt_release:
   - 19.1
   - 20.0
+  - 21.0
 
 elixir:
   - 1.4.5
   - 1.5.0
+  - 1.6.0
 
 sudo: false
