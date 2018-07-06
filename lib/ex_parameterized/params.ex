@@ -31,7 +31,7 @@ defmodule ExUnit.Parameterized.Params do
       {:{}, _, [{:%{}, _, _}]} ->
         true
 
-      [{:{}, _, [{:%{}, _, _}]}] ->
+      head_list when is_list(head_list) ->
         validate_map?(head)
 
       _ ->

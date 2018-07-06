@@ -170,6 +170,12 @@ defmodule ExParameterizedTest do
     Enum.map([{%{b: 1, c: 2}}], fn x -> x end)
   end
 
+  test_with_params "ast from enum of maps 2", fn a ->
+    assert a == %{b: 1, c: 2}
+  end do
+    Enum.map([{%{b: 1, c: 2}}, {%{b: 1, c: 2}}], fn x -> x end)
+  end
+
   test_with_params "with function", fn p ->
     p
   end do
