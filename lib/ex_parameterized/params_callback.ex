@@ -26,14 +26,17 @@ defmodule ExUnit.Parameterized.ParamsCallback do
   defp validate_map?([]), do: false
   defp validate_map?([{:%{}, _, _}]), do: true
   defp validate_map?({{_, _, [{_, _, [:Enum]}, :map]}, _, ast}), do: validate_map?(ast)
+
   defp validate_map?(asts) when is_list(asts) do
     [head | _tail] = asts
 
     case head do
       {:{}, _, [{:%{}, _, _}]} ->
         true
+
       [{:{}, _, [{:%{}, _, _}]}] ->
         validate_map?(head)
+
       _ ->
         false
     end
