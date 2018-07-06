@@ -115,6 +115,18 @@ defmodule ExParameterizedParamsCallbackTest do
     ]
   end
 
+  test_with_params "ast from enum", context, fn a ->
+    assert a == ["a", "b"]
+  end do
+    Enum.map([{["a", "b"]}], fn x -> x end)
+  end
+
+  test_with_params "ast from enum of maps", context, fn a ->
+    assert a == %{b: 1, c: 2}
+  end do
+    Enum.map([{%{b: 1, c: 2}}], fn x -> x end)
+  end
+
   test_with_params "add description for each params with context", context, fn a, b, expected ->
     str = a <> " and " <> b
     assert str == expected

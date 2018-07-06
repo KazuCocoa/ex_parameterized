@@ -23,24 +23,26 @@ defmodule ExUnit.Parameterized.ParamsCallback do
     end
   end
 
-  defp validate_map?(asts, result \\ [])
-  defp validate_map?([], result) when is_list(result), do: true
-  defp validate_map?([], _), do: false
-  defp validate_map?([{:%{}, _, _}], _), do: true
+  defp validate_map?([]), do: false
+  defp validate_map?([{:%{}, _, _}]), do: true
+  defp validate_map?({{_, _, [{_, _, [:Enum]}, :map]}, _, ast}), do: validate_map?(ast)
 
-  defp validate_map?(asts, result) when is_list(asts) do
-    [head | tail] = asts
+  defp validate_map?(asts) when is_list(asts) do
+    [head | _tail] = asts
 
     case head do
-      {_, _, [{:%{}, _, _}]} ->
-        tail |> validate_map?([head | result])
+      {:{}, _, [{:%{}, _, _}]} ->
+        true
+
+      [{:{}, _, [{:%{}, _, _}]}] ->
+        validate_map?(head)
 
       _ ->
         false
     end
   end
 
-  defp validate_map?(_asts, _result), do: false
+  defp validate_map?(_asts), do: false
 
   defp do_test_with(ast, desc, context, fun) do
     ast
@@ -62,6 +64,9 @@ defmodule ExUnit.Parameterized.ParamsCallback do
   defp test_with(desc, context, fun, {{_, _, values}, num}),
     do: run("'#{desc}': number of #{num}", context, fun, values)
 
+  defp test_with(desc, context, fun, {[{:{}, _, [{:%{}, _, values}]}], num}),
+    do: run("'#{desc}': number of #{num}", context, fun, values)
+
   # Quote literals case : http://elixir-lang.org/docs/master/elixir/Kernel.SpecialForms.html#quote/2
   defp test_with(desc, context, fun, {values, num}),
     do: run("'#{desc}': number of #{num}", context, fun, Tuple.to_list(values))
@@ -73,6 +78,10 @@ defmodule ExUnit.Parameterized.ParamsCallback do
   end
 
   defp param_with_index(list) when is_list(list) do
+    Enum.zip(list, 0..Enum.count(list))
+  end
+
+  defp param_with_index({_, _, [list, _]}) when is_list(list) do
     Enum.zip(list, 0..Enum.count(list))
   end
 
