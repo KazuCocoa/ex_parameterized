@@ -1,13 +1,14 @@
 language: elixir
 
-opt_release:
-  - 20.0
-  - 21.0
-
-elixir:
-  - 1.4.5
-  - 1.5.0
-  - 1.6.0
-  - 1.7.0
+matrix:
+  include:
+    - elixir: '1.4.5'
+      opt_release: '19.3'
+    - elixir: '1.5'
+      opt_release: '20.0'
+    - elixir: '1.6'
+      opt_release: '20.0'
+    - elixir: '21.0'
+      opt_release: '1.7'
 
 sudo: false
