@@ -166,4 +166,13 @@ defmodule ExParameterizedParamsCallbackTest do
       {make.(1)}
     ]
   end
+
+  test_with_params "with map as second parameter", context, fn a, m ->
+    assert a == "some"
+    assert m.a == "world"
+  end do
+    [
+      {"some", %{a: context[:hello], b: 2, c: 3}}
+    ]
+  end
 end
