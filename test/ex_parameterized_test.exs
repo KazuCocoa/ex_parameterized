@@ -185,4 +185,13 @@ defmodule ExParameterizedTest do
       {make.(1)}
     ]
   end
+
+  test_with_params "with map as second parameter", fn a, m ->
+    assert a == "some"
+    assert m.a == 1
+  end do
+    [
+      {"some", %{a: 1, b: 2, c: 3}}
+    ]
+  end
 end

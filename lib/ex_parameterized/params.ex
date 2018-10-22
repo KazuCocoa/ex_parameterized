@@ -55,7 +55,7 @@ defmodule ExUnit.Parameterized.Params do
 
   # Quote literals case : http://elixir-lang.org/docs/master/elixir/Kernel.SpecialForms.html#quote/2
   defp test_with(desc, fun, {{param_desc, values}, num}) when is_atom(param_desc) do
-    run("'#{desc}': '#{param_desc}': number of #{num}", fun, Tuple.to_list(values))
+    run("'#{desc}': '#{param_desc}': number of #{num}", fun, escape_values(values))
   end
 
   defp test_with(desc, fun, {{_, _, values}, num}),
@@ -65,8 +65,9 @@ defmodule ExUnit.Parameterized.Params do
     do: run("'#{desc}': number of #{num}", fun, values)
 
   # Quote literals case : http://elixir-lang.org/docs/master/elixir/Kernel.SpecialForms.html#quote/2
-  defp test_with(desc, fun, {values, num}),
-    do: run("'#{desc}': number of #{num}", fun, Tuple.to_list(values))
+  defp test_with(desc, fun, {values, num}) do
+    run("'#{desc}': number of #{num}", fun, escape_values(values))
+  end
 
   defp run(desc, fun, params) do
     quote do
@@ -84,5 +85,16 @@ defmodule ExUnit.Parameterized.Params do
 
   defp param_with_index(_) do
     raise(ArgumentError, message: "Unsupported format")
+  end
+
+  defp escape_values(values) do
+    values
+    |> Tuple.to_list
+    |> Enum.map(fn x ->
+      case x do
+        value when is_map(value) -> Macro.escape(x)
+        _ -> x
+      end
+    end)
   end
 end
