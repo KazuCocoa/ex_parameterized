@@ -89,7 +89,7 @@ defmodule ExUnit.Parameterized.Params do
 
   defp escape_values(values) do
     values
-    |> Tuple.to_list
+    |> Tuple.to_list()
     |> Enum.map(fn x ->
       case x do
         value when is_map(value) -> Macro.escape(x)
