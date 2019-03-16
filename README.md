@@ -26,7 +26,7 @@ Please see module [docs](http://hexdocs.pm/ex_parameterized/extra-api-reference.
 
 First, add Reporter to your mix.exs dependencies:
 
-```
+```elixir
 def deps do
   [
     {:ex_parameterized, "~> 1.3.5"}
@@ -34,7 +34,7 @@ def deps do
 end
 ```
 
-and run ``$ mix deps.get`.
+and run `$ mix deps.get`.
 
 ## QuickUse
 
