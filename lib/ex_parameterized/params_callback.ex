@@ -52,12 +52,14 @@ defmodule ExUnit.Parameterized.ParamsCallback do
     end)
   end
 
-  defp test_with(desc, context, fun, {{param_desc, {_, _, values}}, num}) when is_atom(param_desc) do
+  defp test_with(desc, context, fun, {{param_desc, {_, _, values}}, num})
+       when is_atom(param_desc) and not is_nil(param_desc) do
     run("'#{desc}': '#{param_desc}': number of #{num}", context, fun, values)
   end
 
   # Quote literals case : http://elixir-lang.org/docs/master/elixir/Kernel.SpecialForms.html#quote/2
-  defp test_with(desc, context, fun, {{param_desc, values}, num}) when is_atom(param_desc) do
+  defp test_with(desc, context, fun, {{param_desc, values}, num})
+       when is_atom(param_desc) and not is_nil(param_desc) do
     run("'#{desc}': '#{param_desc}': number of #{num}", context, fun, escape_values(values))
   end
 

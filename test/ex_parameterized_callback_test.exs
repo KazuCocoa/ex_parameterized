@@ -3,7 +3,7 @@ defmodule ExParameterizedParamsCallbackTest do
   use ExUnit.Parameterized
 
   setup do
-    {:ok, [hello: "world", value: 1, bool: false]}
+    {:ok, [hello: "world", value: 1, bool: false, nil_value: nil]}
   end
 
   test "ast format when one param with context" do
@@ -93,6 +93,16 @@ defmodule ExParameterizedParamsCallbackTest do
   end do
     [
       {context[:value], 2, 2}
+    ]
+  end
+
+  test_with_params "with nil", context, fn expected, a, b ->
+    assert a == expected
+    assert b == expected
+  end do
+    [
+      {context[:value], 1, 1},
+      {context[:nil_value], nil, nil}
     ]
   end
 
