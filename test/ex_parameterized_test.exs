@@ -65,6 +65,15 @@ defmodule ExParameterizedTest do
     ]
   end
 
+  test_with_params "with nil", fn a, b ->
+    assert a == b
+  end do
+    [
+      {1, 1},
+      {nil, nil}
+    ]
+  end
+
   test_with_params "with map value", fn a ->
     assert a.b == 1
     assert a.c == 2
