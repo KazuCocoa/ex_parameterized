@@ -12,5 +12,7 @@ matrix:
       otp_release: '21.0'
     - elixir: '1.8'
       otp_release: '21.0'
+    - elixir: '1.9'
+      otp_release: '22.0'
 
 sudo: false
