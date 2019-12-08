@@ -23,7 +23,7 @@ defmodule ExParameterized.Mixfile do
   defp deps do
     [
       {:earmark, "~> 1.0", only: :dev},
-      {:ex_doc, "~> 0.10", only: :dev}
+      {:ex_doc, "~> 0.21", only: :dev, runtime: false},
     ]
   end
 
