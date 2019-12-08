@@ -29,7 +29,7 @@ First, add Reporter to your mix.exs dependencies:
 ```elixir
 def deps do
   [
-    {:ex_parameterized, "~> 1.3.6"}
+    {:ex_parameterized, "~> 1.3.7"}
   ]
 end
 ```
