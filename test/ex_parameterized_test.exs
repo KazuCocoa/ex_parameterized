@@ -204,7 +204,7 @@ defmodule ExParameterizedTest do
     ]
   end
 
-  test_with_params "nested tuple combination", fn a, expected ->
+  test_with_params "nested tuple in a list", fn a, expected ->
     case a do
       [1, 0] ->
         assert {{1, 1}, 0, []} == expected

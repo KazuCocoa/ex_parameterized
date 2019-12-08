@@ -186,7 +186,7 @@ defmodule ExParameterizedParamsCallbackTest do
     ]
   end
 
-  test_with_params "nested tuple combination", context, fn a, expected ->
+  test_with_params "nested tuple in a list", context, fn a, expected ->
     case a do
       [1, 0] ->
         assert {{1, context[:value]}, 0, []} == expected
