@@ -94,7 +94,9 @@ defmodule ExUnit.Parameterized.Params do
     |> Tuple.to_list()
     |> Enum.map(fn x ->
       case x do
-        value when is_map(value) -> Macro.escape(x)
+        # The tuple might be a function
+        value when is_tuple(value) and is_atom(elem(value, 0)) -> x
+        value when is_map(value) or is_tuple(value) -> Macro.escape(x)
         _ -> x
       end
     end)
