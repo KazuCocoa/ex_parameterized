@@ -190,6 +190,7 @@ defmodule ExParameterizedParamsCallbackTest do
     case a do
       [1, 0] ->
         assert {{1, context[:value]}, 0, []} == expected
+
       [1, 0, 2] ->
         assert {{1, 1}, 0, [{2, 2}, {2, 2}]} == expected
     end

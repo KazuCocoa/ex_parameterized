@@ -97,11 +97,18 @@ defmodule ExUnit.Parameterized.ParamsCallback do
     |> Enum.map(fn x ->
       case x do
         # The value has 'callback' as arguments. Then, it has '.:'
-        {{:., _, _}, _, _} -> x
+        {{:., _, _}, _, _} ->
+          x
+
         # The tuple might be a function
-        value when is_tuple(value) and is_atom(elem(value, 0)) -> x
-        value when is_map(value) or is_tuple(value) -> Macro.escape(x)
-        _ -> x
+        value when is_tuple(value) and is_atom(elem(value, 0)) ->
+          x
+
+        value when is_map(value) or is_tuple(value) ->
+          Macro.escape(x)
+
+        _ ->
+          x
       end
     end)
   end
