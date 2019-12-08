@@ -185,4 +185,25 @@ defmodule ExParameterizedParamsCallbackTest do
       {"some", %{a: context[:hello], b: 2, c: 3}}
     ]
   end
+
+  test_with_params "nested tuple in a list", context, fn a, expected ->
+    case a do
+      [1, 0] ->
+        assert {{1, context[:value]}, 0, []} == expected
+
+      [1, 0, 2] ->
+        assert {{1, 1}, 0, [{2, 2}, {2, 2}]} == expected
+    end
+  end do
+    [
+      {
+        [1, 0],
+        {{1, 1}, 0, []}
+      },
+      {
+        [1, 0, 2],
+        {{context[:value], 1}, 0, [{2, 2}, {2, 2}]}
+      }
+    ]
+  end
 end

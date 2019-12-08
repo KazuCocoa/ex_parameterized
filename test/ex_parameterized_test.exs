@@ -203,4 +203,25 @@ defmodule ExParameterizedTest do
       {"some", %{a: 1, b: 2, c: 3}}
     ]
   end
+
+  test_with_params "nested tuple in a list", fn a, expected ->
+    case a do
+      [1, 0] ->
+        assert {{1, 1}, 0, []} == expected
+
+      [1, 0, 2] ->
+        assert {{1, 1}, 0, [{2, 2}, {2, 2}]} == expected
+    end
+  end do
+    [
+      {
+        [1, 0],
+        {{1, 1}, 0, []}
+      },
+      {
+        [1, 0, 2],
+        {{1, 1}, 0, [{2, 2}, {2, 2}]}
+      }
+    ]
+  end
 end
