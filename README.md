@@ -1,7 +1,7 @@
 ExParameterized
 ===============
 
-[![Build Status](https://travis-ci.org/KazuCocoa/ex_parameterized.svg)](https://travis-ci.org/KazuCocoa/ex_parameterized)
+![Elixir CI](https://github.com/KazuCocoa/ex_parameterized/workflows/Elixir%20CI/badge.svg?branch=master)
 [![](https://img.shields.io/hexpm/v/ex_parameterized.svg?style=flat)](https://hex.pm/packages/ex_parameterized)
 
 ## Description
