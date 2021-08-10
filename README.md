@@ -20,7 +20,7 @@ You can see some example in `test/ex_parameterized_*.exs`
 
 ## Usage
 
-Please see module [docs](http://hexdocs.pm/ex_parameterized/extra-api-reference.html).
+Please see module [docs](https://hexdocs.pm/ex_parameterized/ExUnit.Parameterized.html#content).
 
 ## Install
 
