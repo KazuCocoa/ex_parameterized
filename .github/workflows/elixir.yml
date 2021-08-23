@@ -13,8 +13,6 @@ jobs:
       fail-fast: false
       matrix:
         pair:
-          - otp-version: '19'
-            elixir-version: '1.4'
           - otp-version: '20'
             elixir-version: '1.5'
           - otp-version: '20'
@@ -29,6 +27,8 @@ jobs:
             elixir-version: '1.10'
           - otp-version: '23'
             elixir-version: '1.11'
+          - otp-version: '24'
+            elixir-version: '1.12'
 
     steps:
     - uses: actions/checkout@v2
