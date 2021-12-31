@@ -9,17 +9,28 @@ defmodule ExParameterizedParamsCallbackTest do
   test "ast format when one param with context" do
     import ExUnit.Parameterized.ParamsCallback
 
-    assert (quote do
-              test_with_params "ast test", context, fn a -> a == "test" end do
-                [{"test"}]
-              end
-            end)
-           |> Macro.to_string() ==
+    output_string =
+      quote do
+        test_with_params "ast test", context, fn a -> a == "test" end do
+          [{"test"}]
+        end
+      end
+      |> Macro.to_string()
+
+    # Elixir 1.12 and lower have ()
+    # Elixir 1.13 and above do not have ()
+    assert output_string ==
              String.trim(~S"""
              test_with_params("ast test", context, fn a -> a == "test" end) do
                [{"test"}]
              end
-             """)
+             """) ||
+             output_string ==
+               String.trim(~S"""
+               test_with_params("ast test", context, fn a -> a == "test" end) do
+                 [{"test"}]
+               end
+               """)
   end
 
   test "ast format when two param with context" do
