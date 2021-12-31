@@ -9,10 +9,26 @@ defmodule ExParameterizedParamsCallbackTest do
   test "ast format when one param with context" do
     import ExUnit.Parameterized.ParamsCallback
 
+    assert (quote do
+              test_with_params "ast test", context, fn a -> a == "test" end do
+                [{"test"}]
+              end
+            end)
+           |> Macro.to_string() ==
+             String.trim(~S"""
+             test_with_params("ast test", context, fn a -> a == "test" end) do
+               [{"test"}]
+             end
+             """)
+  end
+
+  test "ast format when two param with context" do
+    import ExUnit.Parameterized.ParamsCallback
+
     output_string =
       quote do
-        test_with_params "ast test", context, fn a -> a == "test" end do
-          [{"test"}]
+        test_with_params "ast test", context, fn a, b -> assert a + b == 2 end do
+          [{1, 2}]
         end
       end
       |> Macro.to_string()
@@ -21,32 +37,16 @@ defmodule ExParameterizedParamsCallbackTest do
     # Elixir 1.13 and above do not have ()
     assert output_string ==
              String.trim(~S"""
-             test_with_params("ast test", context, fn a -> a == "test" end) do
-               [{"test"}]
+             test_with_params("ast test", context, fn a, b -> assert(a + b == 2) end) do
+               [{1, 2}]
              end
              """) ||
              output_string ==
                String.trim(~S"""
-               test_with_params("ast test", context, fn a -> a == "test" end) do
-                 [{"test"}]
+               test_with_params("ast test", context, fn a, b -> assert a + b == 2 end) do
+                 [{1, 2}]
                end
                """)
-  end
-
-  test "ast format when two param with context" do
-    import ExUnit.Parameterized.ParamsCallback
-
-    assert (quote do
-              test_with_params "ast test", context, fn a, b -> assert a + b == 2 end do
-                [{1, 2}]
-              end
-            end)
-           |> Macro.to_string() ==
-             String.trim(~S"""
-             test_with_params("ast test", context, fn a, b -> assert(a + b == 2) end) do
-               [{1, 2}]
-             end
-             """)
   end
 
   @tag skip: "If failed to skip, test will fail"
