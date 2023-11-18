@@ -33,6 +33,8 @@ jobs:
             elixir-version: '1.13'
           - otp-version: '24'
             elixir-version: '1.14'
+          - otp-version: '24'
+            elixir-version: '1.15'
 
     steps:
     - uses: actions/checkout@v2
