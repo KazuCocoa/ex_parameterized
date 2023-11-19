@@ -4,6 +4,8 @@ ExParameterized
 ![Elixir CI](https://github.com/KazuCocoa/ex_parameterized/workflows/Elixir%20CI/badge.svg?branch=master)
 [![](https://img.shields.io/hexpm/v/ex_parameterized.svg?style=flat)](https://hex.pm/packages/ex_parameterized)
 
+This no longer works with Elixir 1.15 right now.
+
 ## Description
 
 This library support parameterized test with `test_with_params` macro.
